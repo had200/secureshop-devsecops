@@ -11,7 +11,10 @@ app = Flask(__name__)
 CORS(app)
 
 # ⚠️ EN PRODUCTION: utiliser HashiCorp Vault (Step 8 du workshop)
-JWT_SECRET = os.environ.get("JWT_SECRET", "dev-secret-change-me-in-production")
+
+JWT_SECRET = os.environ.get("JWT_SECRET")
+if not JWT_SECRET:
+    raise RuntimeError("JWT_SECRET environment variable is required")
 JWT_EXPIRY_HOURS = 1
 
 # Base de données en mémoire (remplacer par PostgreSQL en prod)

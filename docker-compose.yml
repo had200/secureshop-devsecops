@@ -6,6 +6,8 @@ services:
     build: ./user-service
     ports:
       - "8001:8001"
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
 
   product-service:
     build: ./product-service
@@ -21,16 +23,21 @@ services:
     build: ./payment-service
     ports:
       - "8004:8004"
+    environment:
+      - PAYMENT_SECRET_KEY=${PAYMENT_SECRET_KEY}
 
   notification-service:
     build: ./notification-service
     ports:
       - "8005:8005"
+    environment:
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
 
   inventory-service:
     build: ./inventory-service
     ports:
       - "8006:8006"
+      
   api-gateway:
     image: nginx:latest
     volumes:
